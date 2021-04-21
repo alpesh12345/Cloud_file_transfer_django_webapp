@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+<html>
+<head>
+  <title>Upload/Download</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+
+  <link rel="stylesheet"  href="{% static 'Upload_down_style.css'%}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>  
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'> 
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+$(document).ready(function(){
+
+    $('#buttonnn').click(function(e) {
+        var inputvalue = $("#inputtt").val();
+        //window.location.replace(" http://www.example.com/page/"+inputvalue);
+        urll=inputvalue.split("/")
+        url=urll[3]
+        ur="./media/" + url
+        //var element = document.createElement('a');
+const a = document.createElement('a')
+        console.log(ur);
+  a.href = ur
+  a.download = url
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+    });
+});
+</script>
+</head>
+
+
+<body class="body">
+
+<div class="topnav">
+      <a href="index.html">Home</a>
+  <a class="active" href="Upload_down.html">Upload/Download</a>
+  <a href="about.html">About/Contact</a>
+</div>    
+    
+<div class="login-page">
+  
+  <div class="form2" onLoad="buildHtmlTable()">
+      <h1 align="center"> FILE AVAILABLE TO DOWNLOAD </H1>
+        <h5 align="center">Just copy paste file name to request</h5>
+        <h5 align="center">Then do same to download</h5>
+        <table id="table" border="1">
+            <tr>
+                <th>file name</th>
+                <th>copy</th>
+
+            </tr>
+            {% for a in data %}
+                           <tr>
+
+
+                               <td>{{ a }}</td>
+                               <td><input type="text" name=”temp_name” value="{{ a }}"/></td>
+
+
+                           </tr>
+                {% endfor %}
+
+
+
+        </table>
+      <form method = "POST" enctype="multipart/form-data">
+       {% csrf_token %}
+          <br>
+       <input type="text" name="file_name" placeholder="copy file-----request"/>
+       <center><button type="submit" name="run_script">Request</button></center>
+      <br>
+      </form>
+        <input type="text" name="down" id="inputtt" placeholder="copy file-----downlaod"/>
+       <center><button type="button" id="buttonnn">Download</button>
+
+      <!-- <center> <a id="buttonnn" onclick="fun()" href="#" download> Download</a></center>-->
+</form>
+  </div>
+    
+    <div class="form">
+      <h1 align="center"> FILE SHARING SYSTEM </H1>	
+
+      <B><label align="left">Select a file:</br></br></label></B>
+     <form method = "POST" enctype="multipart/form-data">
+         {% csrf_token %}
+      <input type="text" name="user_name" placeholder="&#xf007;  Username"/>
+      <input type="file" name="myfile" placeholder="&#xf007;  File Src"/>
+      <br>
+      <br>
+
+      <button type="submit" name="upload_run">Upload</button>
+     </form>
+
+
+          <!--<input type="file" placeholder="&#xf007;  Download file"/>
+          <br>
+          <br>
+          <button type="submit" name="run_script">Download</button>
+            <a  href="/script/uploaded_data.json"> Download Document </a>
+        -->
+
+  </div>
+</div>
+
+</body>
+</html>
+

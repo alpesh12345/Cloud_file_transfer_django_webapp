@@ -1,0 +1,25 @@
+   <script type="text/javascript">
+
+$(document).ready(function(){
+
+    $('#button').click(function(e) {
+       var inputvalue = $("#inputtt").val();
+       inputvalue = inputvalue.split("/");
+       window.location.replace("/media/download/"+inputvalue[3]);
+        //return "/media/download/"+inputvalue[3];
+       //filename = /media/download/"+inputvalue[3];
+
+ var element = document.createElement('a');
+  element.setAttribute('href', filename);
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+
+    });
+});
+</script>
